@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 // Eloquentを使うので必ず入れてください
 use App\Models\Post;
 
-// Validatorを使うのに必要
+// Validator(バリデーション)を使うのに必要
 use Validator;
 
 class PostController extends Controller
@@ -81,7 +81,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Post::find($id);
+        return view('post.show', ['item' => $item]);
     }
 
     /**
@@ -104,7 +105,17 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $form = $request->all();
+
+        // (注)バリデーションするかテーブル側をnull許容すること
+
+        unset($form['_token']);
+        $post->user_id = $request->user_id;
+        $post->title = $request->title;
+        $post->message = $request->message;
+        $post->save();
+        return redirect('/post');
     }
 
     /**

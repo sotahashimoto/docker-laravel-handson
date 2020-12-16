@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
 
             //追加したいデータ型とカラムを追加
             $table->integer('user_id');
+            // nullable カラムにNULL値を許す
             $table->string('title')->nullable();
             $table->string('message')->nullable();
 
