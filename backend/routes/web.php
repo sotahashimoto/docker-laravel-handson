@@ -26,3 +26,5 @@ Route::get('users', function()
 {
     return View::make('users');
 });
+
+Route::resource('/post', 'App\Http\Controllers\PostController');
