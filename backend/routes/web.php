@@ -28,3 +28,6 @@ Route::get('users', function()
 });
 
 Route::resource('/post', 'App\Http\Controllers\PostController');
+
+// このページにアクセスする際は登録したメールアドレス・パスワードが必要になります
+Route::resource('/post', 'PostController')->middleware('auth');
